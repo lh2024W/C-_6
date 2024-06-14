@@ -1,40 +1,42 @@
-﻿namespace C__6
+namespace C__6
 {
     class Group
     {
-        List<string?> students;
+        List<string?> group;
         public string? nameGroup;
         public string? descriptionGroup;
         public string? numberCourse;
         public string? studentInfo;
-        public static Int32 count = 0;
+        public string? numberOfStudent;
 
-        public Group(): this ("ПВ312", "Программирование", "562234", "Иванов И.И.") 
+        public Group() : this("ПВ312", "Программирование", "562234", "Иванов И.И.", "1")
         {
             //Console.WriteLine ("c-tor without params");
         }
 
         //main c-tor
-        public Group(string? nameGroup, string? descriptionGroup, string? numberCourse, string? studentInfo) 
+        public Group(string? nameGroup, string? descriptionGroup, string? numberCourse, string? studentInfo, string? numberOfStudent)
         {
-            students = new List<string?> ();
-            
+            group = new List<string?>();
+
             SetNameGroup(nameGroup);
             SetDescriptionGroup(descriptionGroup);
             SetNumberCourse(numberCourse);
-            SetStudent(nameGroup, descriptionGroup, numberCourse, studentInfo);
+            SetNumberOfStudent(numberOfStudent);
+            SetStudent(nameGroup, descriptionGroup, numberCourse, studentInfo, numberOfStudent);
 
             //Console.WriteLine("main c-tor");
         }
-                
-        public void SetStudent(string? nameGroup, string? descriptionGroup, string? numberCourse, string? studentInfo)
+
+        public void SetStudent(string? nameGroup, string? descriptionGroup, string? numberCourse, string? studentInfo, string? numberOfStudent)
         {
-            students.Add(nameGroup);
-            students.Add(descriptionGroup);
-            students.Add(numberCourse);
-            students.Add(studentInfo);
+            group.Add(nameGroup);
+            group.Add(descriptionGroup);
+            group.Add(numberCourse);
+            group.Add(studentInfo);
+            group.Add(numberOfStudent);
         }
-                
+
         public void SetNameGroup(string? nameGroup)
         {
             this.nameGroup = nameGroup;
@@ -50,24 +52,40 @@
             this.numberCourse = numberCourse;
         }
 
-        public void AddStudent(string? nameGroup, string? descriptionGroup, string? numberCourse, string? studentInfo)
+        public void AddStudent(string? nameGroup, string? descriptionGroup, string? numberCourse, string? studentInfo, string? numberOfStudent)
         {
-            SetStudent(nameGroup, descriptionGroup, numberCourse, studentInfo);
+            SetStudent(nameGroup, descriptionGroup, numberCourse, studentInfo, numberOfStudent);
         }
 
-        public void ShowStudents() 
+        public void SetNumberOfStudent(string? numberOfStudent)
         {
-            foreach (var s in students)
+            this.numberOfStudent = numberOfStudent;
+        }
+
+        public void ShowStudents()
+        {
+            foreach (var s in group)
+                Console.WriteLine(s + " ");
+
+            Console.WriteLine();
+        }
+
+        public void EditNameGroup(string? nameGroupOld, string? nameGroupNew) // не работает ИЗМЕНИТЬ НАЗВАНИЕ ГРУППЫ
+        {
+
+            //group.FindAll(nameGroupOld);// не работает
+
+            /*foreach (var s in group)// не работает
             {
-                Console.Write(s + " " + "\n");// переделать
-                
-            }
-           Console.WriteLine();
-        }
+                if (s == nameGroupOld)
+                {
+                    s = nameGroupNew;
+                }
+            } */
 
-        public void EditGroupInStudent(string? nameGroup, string? descriptionGroup)
-        {
-            //students.
+            //group.RemoveAt(index);//работает только, если знаешь индекс
+            //group.Insert(index, nameGroupNew);
+
         }
 
     }
@@ -77,10 +95,13 @@
         {
             Group g = new Group();
             //g.ShowStudents();
-            
-            g.AddStudent("ПВ312", "Программирование", "562234", "Федоров А.И.");
+
+            g.AddStudent("ПВ312", "Программирование", "562234", "Федоров А.И.", "2");
+            g.AddStudent("ПВ312", "Программирование", "562234", "Васильев Б.С.", "3");
+            // g.ShowStudents();
+            g.EditNameGroup("ПВ312", "ПВ313");
+            //g.EditNameGroup(0, "ПВ313");
             g.ShowStudents();
-            
         }
     }
 }
